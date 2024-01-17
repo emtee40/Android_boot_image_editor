@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
  if [ "x$1" = "xassemble" ]; then
  echo "already assembled"
  exit
@@ -11,4 +11,10 @@
  echo "no cleaning is needed"
  exit 0
  fi
- java -jar bbootimg/bbootimg.jar $*
+if [[ "$2" == "-Dpart="* ]]; then
+    set -x
+    java $2 -jar bbootimg/bbootimg.jar $1
+else
+    set -x
+    java -jar bbootimg/bbootimg.jar $*
+fi
